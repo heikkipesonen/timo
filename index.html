@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ttt</title>
+  </head>
+  <body>
+    <div class="timo">
+      <img src="https://ucedn23mhs15clon8mbzc165-wpengine.netdna-ssl.com/wp-content/uploads/2017/04/timo_makinen.jpg" alt="">
+    </div>
+    <div class="time"></div>
+    <style>
+      @keyframes rotate {
+        0% {
+          transform: translate3d(0, 100%, 0);
+        }
+        50% {
+          transform: translate3d(0, 0, 0);
+        }
+        100% {
+          transform: translate3d(0, 100%, 0);
+        }
+      }
+
+      .timo {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        animation: rotate 10s infinite;
+        animation-timing-function: linear;
+        text-align: center;
+      }
+
+      .timo img {
+        height: : 100vh;
+      }
+
+      .time {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        font-family: sans-serif;
+        color: white;
+        text-shadow: 0px 0px 15px rgba(0,0,0,0.7);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 40pt;
+      }
+    </style>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script type="text/javascript">
+      let run = true
+      const el = document.querySelector('.time')
+
+      function pad(i) {
+        return ('0'+i).slice(-2)
+      }
+
+      function update () {
+        const time = moment()
+        const next = moment()
+        next.add(1, 'day')
+        const day = next.isoWeekday()
+
+        if (day > 5) {
+          next.add(1, 'week')
+          next.startOf('isoweek')
+        }
+
+        next.hours(13)
+        next.minutes(0)
+        next.seconds(0)
+
+        const duration = moment.duration(next.valueOf() - time.valueOf())
+        el.innerHTML = '<p>time to timo</p><h1>' + [pad(duration.days()), pad(duration.hours()), pad(duration.minutes()), pad(duration.seconds())].join(':') + '</h1>'
+      }
+
+      setInterval(() => {
+        window.requestAnimationFrame(update)
+      }, 500)
+    </script>
+  </body>
+</html>
