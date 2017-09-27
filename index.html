@@ -6,11 +6,17 @@
   </head>
   <body>
     <div class="timo">
-      <img src="https://ucedn23mhs15clon8mbzc165-wpengine.netdna-ssl.com/wp-content/uploads/2017/04/timo_makinen.jpg" alt="">
+      <div class="timo-container">
+        <img src="https://ucedn23mhs15clon8mbzc165-wpengine.netdna-ssl.com/wp-content/uploads/2017/04/timo_makinen.jpg" alt="">
+      </div>
     </div>
     <div class="time"></div>
     <style>
-      @keyframes rotate {
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      @keyframes notRotate {
         0% {
           transform: translate3d(0, 100%, 0);
         }
@@ -22,11 +28,15 @@
         }
       }
 
-      .timo {
+      .timo, .timo-container {
         position: absolute;
         width: 100vw;
         height: 100vh;
-        animation: rotate 10s infinite;
+        overflow: hidden;
+      }
+
+      .timo-container {
+        animation: notRotate 10s infinite;
         animation-timing-function: linear;
         text-align: center;
       }
